@@ -10,10 +10,25 @@ replaceColon (x:xs)
   | x == ':' = (' ':(replaceColon xs))
   | otherwise = (x:(replaceColon xs))
 
+dayInMonth :: Int -> Int
+dayInMonth month 
+  | month == 1 = 31
+  | month == 2 = 59
+  | month == 3 = 90
+  | month == 4 = 120
+  | month == 5 = 151
+  | month == 6 = 181
+  | month == 7 = 212
+  | month == 8 = 243
+  | month == 9 = 273
+  | month == 10 = 304
+  | month == 11 = 334
+  | month == 12 = 365
+
 -- Перевод "00:00" в секунды
 toSeconds :: String -> Int
-toSeconds str = hours * 3600 + minuts * 60
-  where [hours,minuts] = map read (words (replaceColon str))
+toSeconds str = (year - 1) * 31536000 + (dayInMonth (month - 1) + day) * 86400 + hour * 3600 + minut * 60
+  where [year, month, day, hour, minut] = map read (words (replaceColon str))
 
 -- преобразование строки в кортеж типа Flight
 parseFlight :: String -> Flight
