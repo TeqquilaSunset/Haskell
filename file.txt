@@ -1,1 +1,13 @@
-Hello, world!
+SU101 Moscow New-York 09:00 14:30
+SU102 Moscow New-York 09:00 19:30
+SU103 Moscow New-York 09:00 10:30
+TK232 Istanbul Paris 14:45 16:50
+BA101 London New-York 11:15 15:45
+SU202 Moscow Paris 12:30 15:10
+KL303 Amsterdam London 08:45 09:45
+SU303 Moscow London 10:30 11:50
+TK305 Istanbul London 16:30 18:00
+SU404 Moscow Beijing 07:30 20:00
+EK521 Dubai New-York 13:15 18:30
+SU103 Moscow New-York 01:00 01:30
+SU103 Moscow New-York 01:30 23:30
