@@ -21,6 +21,7 @@ isLeapYear year
 -- Количество дней с начала года на конец месяца
 dayInMonth :: Int -> Int
 dayInMonth month 
+  | month == 0 = 0
   | month == 1 = 31
   | month == 2 = 59
   | month == 3 = 90
@@ -33,6 +34,7 @@ dayInMonth month
   | month == 10 = 304
   | month == 11 = 334
   | month == 12 = 365
+  | otherwise = error "Unknown month"
 
 -- Перевод строки "00:00:00:00:00" в секунды Int
 toSeconds :: String -> Int
