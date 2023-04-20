@@ -3,13 +3,14 @@ import Data.Function (on)
 
 type Flight = (String, String, String, String, String)
 
--- замена : на пробел
+-- замена ":" на пробел
 replaceColon :: String -> String
 replaceColon "" = ""
 replaceColon (x:xs) 
   | x == ':' = (' ':(replaceColon xs))
   | otherwise = (x:(replaceColon xs))
 
+-- Проеверка на високосный год 
 isLeapYear :: Int -> Bool
 isLeapYear year
     | year `mod` 400 == 0 = True
@@ -17,7 +18,7 @@ isLeapYear year
     | year `mod` 4 == 0 = True
     | otherwise = False
 
-
+-- Количество дней с начала года на конец месяца
 dayInMonth :: Int -> Int
 dayInMonth month 
   | month == 1 = 31
@@ -33,13 +34,13 @@ dayInMonth month
   | month == 11 = 334
   | month == 12 = 365
 
--- Перевод "00:00" в секунды
+-- Перевод строки "00:00:00:00:00" в секунды Int
 toSeconds :: String -> Int
 toSeconds str = let febDay = if isLeapYear year && month > 2 then 1 else 0 in
   (year - 1) * 31536000 + (dayInMonth (month - 1) + (day + febDay)) * 86400 + hour * 3600 + minut * 60
     where [year, month, day, hour, minut] = map read (words (replaceColon str))
 
--- преобразование строки в кортеж типа Flight
+-- Преобразование строки в кортеж типа Flight
 parseFlight :: String -> Flight
 parseFlight line = (f, d, a, depTime, arrTime)
   where [f, d, a, depTime, arrTime] = words line
