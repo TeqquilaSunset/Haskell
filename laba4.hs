@@ -10,6 +10,14 @@ replaceColon (x:xs)
   | x == ':' = (' ':(replaceColon xs))
   | otherwise = (x:(replaceColon xs))
 
+isLeapYear :: Int -> Bool
+isLeapYear year
+    | year `mod` 400 == 0 = True
+    | year `mod` 100 == 0 = False
+    | year `mod` 4 == 0 = True
+    | otherwise = False
+
+
 dayInMonth :: Int -> Int
 dayInMonth month 
   | month == 1 = 31
@@ -27,8 +35,9 @@ dayInMonth month
 
 -- Перевод "00:00" в секунды
 toSeconds :: String -> Int
-toSeconds str = (year - 1) * 31536000 + (dayInMonth (month - 1) + day) * 86400 + hour * 3600 + minut * 60
-  where [year, month, day, hour, minut] = map read (words (replaceColon str))
+toSeconds str = let febDay = if isLeapYear year && month > 2 then 1 else 0 in
+  (year - 1) * 31536000 + (dayInMonth (month - 1) + (day + febDay)) * 86400 + hour * 3600 + minut * 60
+    where [year, month, day, hour, minut] = map read (words (replaceColon str))
 
 -- преобразование строки в кортеж типа Flight
 parseFlight :: String -> Flight
